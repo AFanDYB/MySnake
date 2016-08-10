@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>贪吃蛇</title>
+	<style>
+		*{margin:0;padding:0;}
+		#explain{width:260px;height:260px;border:1px solid #000;position:absolute;top:50px;left:50px;padding:20px;}
+		#box{width:400px;height:400px;margin:50px auto;background:#999;position:relative;}
+		.dan{width:18px;height:18px;margin:1px 0 0 1px;float:left;background:#fff;}
+		#snake div{background:#ff6700;position:absolute;z-index:3;}
+		#snake div.last{background:#2bb8aa;}
+		div#newdiv{width:18px;height:18px;background:#615e73;position:absolute;z-index:6;}
+		#length{position:fixed;top:390px;left:330px;color:#ff6700;}
+		#number{font-size:30px;}
+	</style>
+</head>
+<body>
+	<div id="explain">
+		<h3>游戏介绍:</h3><br>
+		<b>作者：AFanD</b><br><br>
+		<p>(无敌版的小贪)操作说明:</p><br>
+		<p>方向键控制蛇的走向：</p>
+		<p style="color:#ff6700;line-height:32px;">←/A (左); →/D (右);↑/W (上); ↓/S (下)；“空格”重新开始游戏</p>
+		<p style="color:#00f;font-size:12px;margin-bottom:6px;">(无敌版贪吃蛇！！此游戏合适锻炼手指关节，促进血液的循环！！)</p>
+		<button id="start">开始/结束</button>
+		<button id="btn">继续/暂停</button>
+	</div>
+	<div id="box">
+		<div id="length">长度：<span id="number">6</span> 个</div>
+		<div id="snake">
+			<div class="dan"></div>
+			<div class="dan"></div>
+			<div class="dan"></div>
+			<div class="dan"></div>
+			<div class="dan"></div>
+			<div class="dan last"></div>
+		</div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+		<div class="dan"></div>
+	</div>
+	<script>
+		// 设置四个方向的开关
+		var l = false;
+		var r = true;
+		var t = false;
+		var b = false;
+		// 用于判断是暂停还是继续的开关
+		var cS = false;
+		var or = true;
+		// 获取页面上的元素
+		var number = document.getElementById('number');
+		var start = document.getElementById('start');
+		var box = document.getElementById('box');
+		var snake = document.getElementById('snake');
+		var div = snake.getElementsByTagName('div');
+		var divLast = div[div.length-1];
+		var btn = document.getElementById('btn');
+		var wei = 0;
+		var lTiem;
+		var size = 6;
+		// 绑定开始事件
+		start.onclick = function(){
+			if(or){
+				lTiem = setInterval(snakeMove,80);
+				or = false;
+			}else{
+				// 从新加载页面
+				location.reload();
+			}
+		}
+		// 绑定暂停与继续按钮
+		btn.onclick = function(){
+			if(cS){
+				clearInterval(lTiem);
+				lTiem = setInterval(snakeMove,80);
+				cS = false;
+			}else{
+				clearInterval(lTiem);
+				cS = true;
+			}
+		}
+		// 给蛇的每一节定位
+		for(var i=0; i<div.length; i++){
+			div[i].style.left = wei + 'px';
+			div[i].style.top = 0 + 'px';
+			wei += 19;
+		}
+
+		// 触发键盘事件
+		document.onkeydown = function(evt){
+			var e = evt || window.event;
+			// 绑定左键,确保出自己的其他开关都处于关闭状态
+			if(e.keyCode == 37 || e.keyCode == 65){
+				l = true;
+				r = false;
+				t = false;
+				b = false;
+			}
+			// 绑定上键,确保出自己的其他开关都处于关闭状态
+			if(e.keyCode == 38 || e.keyCode == 87){
+				l = false;
+				r = false;
+				t = true;
+				b = false;
+			}
+			// 绑定右键,确保出自己的其他开关都处于关闭状态
+			if(e.keyCode == 39 || e.keyCode == 68){
+				l = false;
+				r = true;
+				t = false;
+				b = false;
+			}
+			// 绑定下键,确保出自己的其他开关都处于关闭状态
+			if(e.keyCode == 40 || e.keyCode == 83){
+				l = false;
+				r = false;
+				t = false;
+				b = true;
+			}
+		}
+
+		// 控制蛇水平位置
+		function snakeMove(){
+			// 判断是否存在生成的div，假如一个div页面已经存在，就不再生成，没有则生成
+			if(!document.getElementById('newdiv')){
+				// 随机生成一个x和y的一个坐标
+				var x = parseInt(Math.random()*21)*19+441;
+				var y = parseInt(Math.random()*21)*19+51;
+				// 随机生成一个方块
+				var setDiv = document.createElement('div');
+				setDiv.style.left = x + 'px';
+				setDiv.style.top = y + 'px';
+				setDiv.id = 'newdiv';
+				// 将生成的div写到页面中
+				document.body.appendChild(setDiv);
+			}
+			// 再次获取所有蛇的div
+			snake = document.getElementById('snake');
+			div = snake.getElementsByTagName('div');
+			div[div.length-1].style.background = '#2bb8aa';
+			var arrLeft = [];
+			var arrTop = [];
+			// l为true时触发
+			if(l){
+				// 存储蛇每一节的坐标
+				for(var i=1; i<div.length; i++){
+					var left = div[i].offsetLeft;
+					var top = div[i].offsetTop;
+					arrLeft.push(left);
+					arrTop.push(top);
+				}
+				for(var i=0; i<div.length; i++){
+					if(i == div.length-1){
+						div[i].style.left = div[i].offsetLeft - 20 + 'px';
+					}else{
+						div[i].style.left = arrLeft[0] - 1 + 'px';
+						div[i].style.top = arrTop[0] - 1 + 'px';
+						arrLeft.shift();
+						arrTop.shift();
+					}
+				}
+			}
+			// r为true时触发
+			if(r){
+				for(var i=1; i<div.length; i++){
+					var left = div[i].offsetLeft;
+					var top = div[i].offsetTop;
+					arrLeft.push(left);
+					arrTop.push(top);
+				}
+				for(var i=0; i<div.length; i++){
+					if(i == div.length-1){
+						div[i].style.left = div[i].offsetLeft + 18 + 'px';
+					}else{
+						div[i].style.left = arrLeft[0] - 1 + 'px';
+						div[i].style.top = arrTop[0] - 1 + 'px';
+						arrLeft.shift();
+						arrTop.shift();
+					}
+				}
+			}
+			// t为true时触发
+			if(t){
+				for(var i=1; i<div.length; i++){
+					var left = div[i].offsetLeft;
+					var top = div[i].offsetTop;
+					arrLeft.push(left);
+					arrTop.push(top);
+				}
+				for(var i=0; i<div.length; i++){
+					if(i == div.length-1){
+						div[i].style.top = div[i].offsetTop - 20 + 'px';
+					}else{
+						div[i].style.left = arrLeft[0] - 1 + 'px';
+						div[i].style.top = arrTop[0] - 1 + 'px';
+						arrLeft.shift();
+						arrTop.shift();
+					}
+				}
+			}
+			// b为true时触发
+			if(b){
+				for(var i=1; i<div.length; i++){
+					var left = div[i].offsetLeft;
+					var top = div[i].offsetTop;
+					arrLeft.push(left);
+					arrTop.push(top);
+				}
+				for(var i=0; i<div.length; i++){
+					if(i == div.length-1){
+						div[i].style.top = div[i].offsetTop + 18 + 'px';
+					}else{
+						div[i].style.left = arrLeft[0] - 1 + 'px';
+						div[i].style.top = arrTop[0] - 1 + 'px';
+						arrLeft.shift();
+						arrTop.shift();
+					}
+				}
+			}
+			// 获取生成点的坐标,用于判断蛇头是否到达这点
+			var getDiv = document.getElementById('newdiv');
+			var getX = parseInt(getDiv.style.left);
+			var getY = parseInt(getDiv.style.top);
+			// console.log(getX+','+getY);
+			// 获取蛇头的坐标
+			var getSL = parseInt(div[div.length-1].style.left)+441;
+			var getST = parseInt(div[div.length-1].style.top)+51;
+			// console.log(getSL,getST);
+			// 判断蛇头到达这点后，删除该点并且生成另外一点，同时增加蛇的长度，
+			if(getX==getSL && getY==getST){
+				// 删除点
+				document.body.removeChild(getDiv);
+				// 获取蛇尾的坐标，并赋值给新的蛇尾
+				var lastL = parseInt(snake.children[0].style.left);
+				var lastT = parseInt(snake.children[0].style.top);
+				// 给蛇添加长度
+				var cDiv = document.createElement('div');
+				// 给元素添加一个类名
+				cDiv.setAttribute('class','dan');
+				cDiv.style.left = lastL + 'px';
+				cDiv.style.top = lastT + 'px';
+				// 在元素指定位置添加一个元素
+				snake.insertBefore(cDiv,snake.children[0]);
+				size++;
+				console.log(size);
+				number.innerHTML = size;
+			}
+		}
+	</script>
+</body>
+</html>
